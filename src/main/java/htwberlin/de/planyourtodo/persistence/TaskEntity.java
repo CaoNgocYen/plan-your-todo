@@ -1,17 +1,29 @@
-package htwberlin.de.planyourtodo.web.api;
+package htwberlin.de.planyourtodo.persistence;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Task {
-
+@Entity(name = "task")
+public class TaskEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private UUID id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "due_date")
     private LocalDate dueDate;
+
+    @Column(name = "is_completed")
     private boolean completed;
 
-    public Task(UUID id, String title, String description, LocalDate dueDate, boolean completed) {
+    public TaskEntity(UUID id, String title, String description, LocalDate dueDate, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -19,14 +31,10 @@ public class Task {
         this.completed = completed;
     }
 
-
+    protected TaskEntity() {}
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -60,7 +68,5 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
-
 
 }
