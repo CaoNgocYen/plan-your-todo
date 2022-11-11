@@ -5,13 +5,13 @@ import java.util.UUID;
 
 public class Task {
 
-    private UUID id;
+    private Long id;
     private String title;
     private String description;
     private LocalDate dueDate;
     private boolean completed;
 
-    public Task(UUID id, String title, String description, LocalDate dueDate, boolean completed) {
+    public Task(Long id, String title, String description, LocalDate dueDate, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -19,13 +19,11 @@ public class Task {
         this.completed = completed;
     }
 
-
-
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,7 +58,5 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
-
 
 }
