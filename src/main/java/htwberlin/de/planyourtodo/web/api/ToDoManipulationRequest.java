@@ -1,40 +1,21 @@
-package htwberlin.de.planyourtodo.persistence;
+package htwberlin.de.planyourtodo.web.api;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity(name = "task")
-public class TaskEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "title", nullable = false)
+public class ToDoManipulationRequest {
     private String title;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
-
-    @Column(name = "is_completed")
     private boolean completed;
 
-    public TaskEntity(String title, String description, LocalDate dueDate, boolean completed) {
-        //this.id = id;
+    public ToDoManipulationRequest(String title, String description, LocalDate dueDate, boolean completed) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.completed = completed;
     }
 
-    protected TaskEntity() {}
-
-    public Long getId() {
-        return id;
-    }
+    public ToDoManipulationRequest() {}
 
     public String getTitle() {
         return title;
@@ -67,5 +48,4 @@ public class TaskEntity {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
 }

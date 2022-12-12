@@ -2,17 +2,28 @@ package htwberlin.de.planyourtodo.web.api;
 
 import java.time.LocalDate;
 
-public class TaskManipulationRequest {
+public class ToDo {
+
+    private Long id;
     private String title;
     private String description;
     private LocalDate dueDate;
     private boolean completed;
 
-    public TaskManipulationRequest(String title, String description, LocalDate dueDate, boolean completed) {
+    public ToDo(Long id, String title, String description, LocalDate dueDate, boolean completed) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.completed = completed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -46,4 +57,5 @@ public class TaskManipulationRequest {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
 }
