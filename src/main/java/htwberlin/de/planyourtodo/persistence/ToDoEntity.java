@@ -16,17 +16,16 @@ public class ToDoEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "due_date", nullable = false)
-    private LocalDate dueDate;
+    @Column(name = "deadline", nullable = false)
+    private LocalDate deadline;
 
     @Column(name = "is_completed")
     private boolean completed;
 
-    public ToDoEntity(String title, String description, LocalDate dueDate, boolean completed) {
-        //this.id = id;
+    public ToDoEntity(String title, String description, LocalDate deadline, boolean completed) {
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.deadline = deadline;
         this.completed = completed;
     }
 
@@ -52,12 +51,12 @@ public class ToDoEntity {
         this.description = description;
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     public boolean isCompleted() {

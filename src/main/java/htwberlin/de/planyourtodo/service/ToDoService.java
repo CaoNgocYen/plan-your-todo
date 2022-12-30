@@ -12,32 +12,28 @@ import java.util.stream.Collectors;
 @Service
 public class ToDoService {
     private final ToDoRepository toDoRepository;
-    public ToDoService(ToDoRepository toDoRepository) {
+    private final ToDoTransformer toDoTransformer;
+    public ToDoService(ToDoRepository toDoRepository, ToDoTransformer toDoTransformer) {
         this.toDoRepository = toDoRepository;
+        this.toDoTransformer = toDoTransformer;
     }
 
     public List<ToDo> findAll() {
         List<ToDoEntity> toDos = toDoRepository.findAll();
         return toDos.stream()
-                .map(toDoEntity -> new ToDo(
-                        toDoEntity.getId(),
-                        toDoEntity.getTitle(),
-                        toDoEntity.getDescription(),
-                        toDoEntity.getDueDate(),
-                        toDoEntity.isCompleted()
-                ))
+                .map(toDoTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public ToDo findById(Long id) {
         var toDoEntity = toDoRepository.findById(id);
-        return toDoEntity.isPresent()? transformEntity(toDoEntity.get()) : null;
+        return toDoEntity.map(toDoTransformer::transformEntity).orElse(null);
     }
 
     public ToDo create(ToDoManipulationRequest request) {
-        var toDoEntity = new ToDoEntity(request.getTitle(), request.getDescription(), request.getDueDate(), request.isCompleted());
+        var toDoEntity = new ToDoEntity(request.getTitle(), request.getDescription(), request.getDeadline(), request.isCompleted());
         toDoEntity = toDoRepository.save(toDoEntity);
-        return transformEntity(toDoEntity);
+        return toDoTransformer.transformEntity(toDoEntity);
     }
 
     public ToDo update(Long id, ToDoManipulationRequest request) {
@@ -48,11 +44,11 @@ public class ToDoService {
         var toDoEntity = toDoEntityOptional.get();
         toDoEntity.setTitle(request.getTitle());
         toDoEntity.setDescription(request.getDescription());
-        toDoEntity.setDueDate(request.getDueDate());
+        toDoEntity.setDeadline(request.getDeadline());
         toDoEntity.setCompleted(request.isCompleted());
+        toDoEntity = toDoRepository.save(toDoEntity);
+        return toDoTransformer.transformEntity(toDoEntity);
 
-        toDoRepository.save(toDoEntity);
-        return transformEntity(toDoEntity);
     }
 
     public boolean deleteById(Long id) {
@@ -63,14 +59,5 @@ public class ToDoService {
         return true;
     }
 
-    public ToDo transformEntity(ToDoEntity toDoEntity) {
-        return new ToDo(
-                toDoEntity.getId(),
-                toDoEntity.getTitle(),
-                toDoEntity.getDescription(),
-                toDoEntity.getDueDate(),
-                toDoEntity.isCompleted()
-        );
-    }
 }
 

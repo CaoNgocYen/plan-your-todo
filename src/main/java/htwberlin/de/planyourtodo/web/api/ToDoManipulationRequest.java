@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class ToDoManipulationRequest {
     private String title;
     private String description;
-    private LocalDate dueDate;
+    private LocalDate deadline;
     private boolean completed;
 
-    public ToDoManipulationRequest(String title, String description, LocalDate dueDate, boolean completed) {
+    public ToDoManipulationRequest(String title, String description, LocalDate deadline, boolean completed) {
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.deadline = deadline;
         this.completed = completed;
     }
 
@@ -33,12 +33,12 @@ public class ToDoManipulationRequest {
         this.description = description;
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     public boolean isCompleted() {
