@@ -58,5 +58,9 @@ public class ToDoService {
         toDoRepository.deleteById(id);
         return true;
     }
+
+    public ToDoEntity get(Long id) {
+        return toDoRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    }
 }
 

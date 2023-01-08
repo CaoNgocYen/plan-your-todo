@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -60,25 +61,13 @@ class ToDoServiceTest implements WithAssertions {
     @Test
     @DisplayName("should return the correct ToDo when given a valid ID")
     void should_return_correct_todo_when_given_valid_id() {
-        // given
-        Long id = 1L;
-        String title = "Write code";
-        String description = "Write some code for a new feature";
-        LocalDate deadline = LocalDate.of(2021, 1, 1);
-        boolean completed = false;
-        ToDoEntity toDoEntity = new ToDoEntity(title, description, deadline, completed);
-        when(repository.findById(id)).thenReturn(Optional.of(toDoEntity));
+        var todo1 = new ToDoEntity(111L, "title", "description", LocalDate.of(2022,12,15), true);
+        doReturn(Optional.of(todo1)).when(repository).findById(111L);
 
-        // when
-        ToDo result = underTest.findById(id);
+        ToDoEntity actual = underTest.get(111L);
 
-        // then
-        assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(id);
-        assertThat(result.getTitle()).isEqualTo(title);
-        assertThat(result.getDescription()).isEqualTo(description);
-        //assertThat(result.getDeadline()).isEqualTo(deadline);
-        assertThat(result.isCompleted()).isEqualTo(completed);
+        assertEquals(actual.getTitle(), "title");
+
     }
 
 

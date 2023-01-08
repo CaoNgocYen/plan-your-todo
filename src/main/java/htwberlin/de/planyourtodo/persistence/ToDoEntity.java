@@ -29,6 +29,14 @@ public class ToDoEntity {
         this.completed = completed;
     }
 
+    public ToDoEntity(Long id, String title, String description, LocalDate deadline, boolean completed) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+        this.completed = completed;
+    }
+
     protected ToDoEntity() {}
 
     public Long getId() {
