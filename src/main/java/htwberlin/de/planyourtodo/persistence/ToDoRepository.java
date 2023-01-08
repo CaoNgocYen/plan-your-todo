@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface ToDoRepository extends JpaRepository<ToDoEntity, Long> {
-
+    List<ToDoEntity> findAllByTitle(String title);
 }
