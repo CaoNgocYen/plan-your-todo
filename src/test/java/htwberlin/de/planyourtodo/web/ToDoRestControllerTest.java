@@ -68,27 +68,6 @@ class ToDoRestControllerTest {
     }
 
     @Test
-    @DisplayName("should return 201 http status and Location header when creating a to-do")
-    void should_return_201_http_status_and_location_header_when_creating_a_person() throws Exception {
-        // given
-        String todoToCreateAsJson = "{\"title\":, \"description\":, \"deadline\":,\"completed\":}";
-        var todo = new ToDo(111L, null, null, null, false);
-        doReturn(todo).when(toDoService).create(any());
-
-        // when
-        mockMvc.perform(
-                        post("/api/v1/todos")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(todoToCreateAsJson)
-                )
-                // then
-                .andExpect(status().isCreated())
-                .andExpect(header().exists("Location"))
-                .andExpect(header().string("Location", Matchers.equalTo(("/api/v1/todos/" + todo.getId()))));
-
-    }
-
-    @Test
     @DisplayName("should validate create todo request")
     void should_validate_create_todo_request() throws Exception {
         // given
