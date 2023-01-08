@@ -35,7 +35,7 @@ public class ToDoRestController {
     public ResponseEntity<Void> createToDo(@Valid @RequestBody ToDoManipulationRequest request) throws URISyntaxException {
          var toDo = toDoService.create(request);
          URI uri = new URI("/api/v1/todos/" + toDo.getId());
-         return ResponseEntity.created(URI.create(String.valueOf(uri))).build();
+         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(path = "api/v1/todos/{id}")

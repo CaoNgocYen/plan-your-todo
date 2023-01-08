@@ -1,19 +1,18 @@
 package htwberlin.de.planyourtodo.web.api;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public class ToDoManipulationRequest {
+
+    @NotBlank(message = "A title muss be filled in.")
     private String title;
+    @NotBlank(message = "A description muss be filled in.")
     private String description;
+    @FutureOrPresent(message = "A date muss be selected.")
     private LocalDate deadline;
     private boolean completed;
-
-    public ToDoManipulationRequest(String title, String description, LocalDate deadline, boolean completed) {
-        this.title = title;
-        this.description = description;
-        this.deadline = deadline;
-        this.completed = completed;
-    }
 
     public ToDoManipulationRequest() {}
 
